@@ -1,9 +1,9 @@
 {
-  "notstatus": "online",
-  "notmessage": "Yes, I'm here!",
+  "status": "online",
+  "message": "Yes, I'm here!",
 
-  "status": "away",
-  "message": "Nope, I'm away.",
+  "notstatus": "away",
+  "notmessage": "Nope, I'm away.",
 
   "last_updated": "2025-06-18T20:58:57Z"
 }
