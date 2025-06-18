@@ -5,11 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Desk Status</title>
   <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --link-color: #80bfff;
+      --status-online: #4CAF50;
+      --status-away: #f44336;
+    }
+
     body {
       font-family: sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       text-align: center;
       margin-top: 10%;
     }
+
     .status {
       font-size: 2em;
       padding: 1em 2em;
@@ -17,23 +28,28 @@
       display: inline-block;
       transition: background 0.3s ease;
     }
+
     .online {
-      background: #4CAF50;
+      background: var(--status-online);
       color: white;
     }
+
     .away {
-      background: #f44336;
+      background: var(--status-away);
       color: white;
     }
+
     .location {
       margin-top: 1.5em;
       font-size: 1em;
-      color: #555;
+      color: var(--text-color);
     }
+
     .location a {
-      color: #007BFF;
+      color: var(--link-color);
       text-decoration: none;
     }
+
     .location a:hover {
       text-decoration: underline;
     }
@@ -52,9 +68,7 @@
   <script>
     fetch('status.json')
       .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (!response.ok) throw new Error('Network response was not ok');
         return response.json();
       })
       .then(data => {
