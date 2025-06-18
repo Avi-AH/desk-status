@@ -1,7 +1,7 @@
 {
-  "status": "online",
-  "message": "Yes, I'm here!",
+  "notstatus": "online",
+  "notmessage": "Yes, I'm here!",
 
-  "notstatus": "away",
-  "notmessage": "Nope, I'm away."
+  "status": "away",
+  "message": "Nope, I'm away."
 }
