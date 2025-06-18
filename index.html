@@ -53,6 +53,12 @@
     .location a:hover {
       text-decoration: underline;
     }
+
+    #last-updated {
+      margin-top: 1em;
+      font-size: 0.9em;
+      color: #aaa;
+    }
   </style>
 </head>
 <body>
@@ -63,10 +69,10 @@
       My desk is next to the water fountain on the 3rd floor of
       <a href="https://maps.app.goo.gl/PJNhLbqLk8yBy7dw5" target="_blank" rel="noopener noreferrer">PDSB</a>.
     </div>
+    <div id="last-updated">Last updated: loading...</div>
   </main>
 
   <script>
-    // Prevent browser caching by appending a timestamp to the JSON URL
     fetch('status.json?nocache=' + new Date().getTime())
       .then(response => {
         if (!response.ok) throw new Error('Network response was not ok');
@@ -76,12 +82,30 @@
         const statusDiv = document.getElementById('status');
         statusDiv.classList.add(data.status); // 'online' or 'away'
         statusDiv.textContent = data.message;
+
+        const lastUpdatedDiv = document.getElementById('last-updated');
+        if (data.last_updated) {
+          const date = new Date(data.last_updated);
+          const formatted = date.toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          lastUpdatedDiv.textContent = 'Last updated: ' + formatted;
+        } else {
+          lastUpdatedDiv.textContent = 'Last updated: unknown';
+        }
       })
       .catch(error => {
         console.error('Error fetching status:', error);
         const statusDiv = document.getElementById('status');
         statusDiv.textContent = "Status unavailable.";
         statusDiv.classList.add('away');
+
+        const lastUpdatedDiv = document.getElementById('last-updated');
+        lastUpdatedDiv.textContent = 'Last updated: unavailable';
       });
   </script>
 </body>
