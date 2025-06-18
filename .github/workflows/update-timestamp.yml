@@ -1,0 +1,26 @@
+name: Update Timestamp
+
+on:
+  push:
+    paths:
+      - status.json
+
+jobs:
+  update-timestamp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set last_updated timestamp
+        run: |
+          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "Updating timestamp to $TIMESTAMP"
+          sed -i "s/\"last_updated\": \".*\"/\"last_updated\": \"$TIMESTAMP\"/" status.json
+
+      - name: Commit updated file
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git commit -am "Auto-update last_updated timestamp"
+          git push
