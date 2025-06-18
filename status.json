@@ -1,9 +1,9 @@
 {
-  "status": "online",
-  "message": "Yes, I'm here!",
+  "astatus": "online",
+  "amessage": "Yes, I'm here!",
 
-  "notstatus": "away",
-  "notmessage": "Nope, I'm unavailable.",
+  "status": "away",
+  "message": "Nope, I'm unavailable.",
 
   "last_updated": "2025-06-18T21:07:52Z"
 }
