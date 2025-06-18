@@ -16,7 +16,8 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           echo "Updating timestamp to $TIMESTAMP"
-          sed -i "s/\"last_updated\": \".*\"/\"last_updated\": \"$TIMESTAMP\"/" status.json
+          sed -i.bak "s/\"last_updated\": \".*\"/\"last_updated\": \"$TIMESTAMP\"/" status.json
+          rm status.json.bak
 
       - name: Commit updated file
         run: |
