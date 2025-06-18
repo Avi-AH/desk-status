@@ -1,5 +1,8 @@
 name: Update Timestamp
 
+permissions:
+  contents: write
+
 on:
   push:
     paths:
@@ -16,12 +19,17 @@ jobs:
         run: |
           TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           echo "Updating timestamp to $TIMESTAMP"
-          sed -i.bak "s/\"last_updated\": \".*\"/\"last_updated\": \"$TIMESTAMP\"/" status.json
-          rm status.json.bak
+          sed -i.bak 's/"last_updated": *".*"/"last_updated": "'"$TIMESTAMP"'"/' status.json
+          cat status.json
+          git diff
 
-      - name: Commit updated file
+      - name: Commit updated file if changed
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git commit -am "Auto-update last_updated timestamp"
-          git push
+          if ! git diff --quiet; then
+            git commit -am "Auto-update last_updated timestamp"
+            git push
+          else
+            echo "No changes to commit."
+          fi
