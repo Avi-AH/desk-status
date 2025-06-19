@@ -1,9 +1,9 @@
 {
-  "status": "online",
-  "message": "Yes, I'm here!",
+  "9status": "online",
+  "9message": "Yes, I'm here!",
 
-  "9status": "away",
-  "9message": "Nope",
+  "status": "away",
+  "message": "Nope",
 
   "last_updated": "2025-06-19T04:23:38Z"
 }
