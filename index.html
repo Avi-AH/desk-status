@@ -9,7 +9,7 @@
       --bg-color: #121212;
       --text-color: #e0e0e0;
       --link-color: #80bfff;
-      --status-online: #4CAF50;
+      --status-here: #4CAF50;
       --status-away: #f44336;
     }
 
@@ -29,8 +29,8 @@
       transition: background 0.3s ease;
     }
 
-    .online {
-      background: var(--status-online);
+    .here {
+      background: var(--status-here);
       color: white;
     }
 
@@ -80,8 +80,14 @@
       })
       .then(data => {
         const statusDiv = document.getElementById('status');
-        statusDiv.classList.add(data.status); // 'online' or 'away'
-        statusDiv.textContent = data.message;
+        statusDiv.classList.add(data.status); // 'here' or 'away'
+
+        const messages = {
+          "here": "Yes, I'm here!",
+          "away": "Nope, I'm not at my desk."
+        };
+
+        statusDiv.textContent = messages[data.status] || "Unknown status";
 
         const lastUpdatedDiv = document.getElementById('last-updated');
         if (data.last_updated) {
